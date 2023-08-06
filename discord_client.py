@@ -69,7 +69,7 @@ class FlushedClient(discord.Client):
         command_args = command.split(" ")
 
         if command_args[0] in commands.command_map:
-            commands.command_map[command_args[0]](self, {
+            await commands.command_map[command_args[0]](self, {
                 "message": message,
                 "channel": channel
             })
@@ -84,7 +84,7 @@ class FlushedClient(discord.Client):
             print(f'Bot said {message.content}')
         elif message.author != self.user:
             print(f'Message from {message.author}: {message.content}')
-            slur = commands.has_slur(message.content)
+            slur = await commands.has_slur(message.content)
             if not slur:
                 await FlushedClient.check_for_commands(self, message, message.channel)
             else:

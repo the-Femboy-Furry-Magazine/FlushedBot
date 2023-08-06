@@ -19,8 +19,8 @@ moderators = ["1", "873014876275114005"]
 
 servmods = ["1"]
 slurred = False
-version = "0.35-beta"
-github_link = "https://github.com/p866e/FlushedBot"
+version = "0.4"
+github_link = "https://github.com/the-Femboy-Furry-Magazine/FlushedBot"
 
 
 print(slurs)
