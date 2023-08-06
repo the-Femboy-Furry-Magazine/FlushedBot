@@ -16,7 +16,7 @@ uwuemotes = ["owo", "OwO", "uwu", "UwU", ">w<", ">~<", "~<~", ">O<", ":3" ]
 servmods = [ "1" ]
 slurred = False
 version = "0.35-beta"
-github_link = "https://github.com/AcousticallyAutistic/FlushedBot/"
+github_link = "https://github.com/p866e/FlushedBot"
 
 
 def get_servers():
