@@ -2,9 +2,12 @@ import discord
 import os
 import platform
 import random
+import requests
+import json
+
 
 BOT_PREFIX = "f!"
-slurs = ["nigg", "fag", "trann"]
+slurs = ["nigg", "xigg", "fag", "trann"]
 moderators = ["1", "873014876275114005"]
 eightballanswers = ["Yes", "Indubitably", "Outlook good", "Do more thinking and try again.", "Don't count on it.",
                     "My sources say no.", "Ask again later.", "Cannot predict now.", "404",
@@ -12,8 +15,16 @@ eightballanswers = ["Yes", "Indubitably", "Outlook good", "Do more thinking and 
 uwuemotes = ["owo", "OwO", "uwu", "UwU", ">w<", ">~<", "~<~", ">O<", ":3" ]
 servmods = [ "1" ]
 slurred = False
-version = "0.34-GITHUB\nhttps://github.com/AcousticallyAutistic/FlushedBot/"
-BOT_TOKEN = "insert_coin"
+version = "0.35-beta"
+github_link = "https://github.com/AcousticallyAutistic/FlushedBot/"
+
+
+def get_servers():
+    global servers
+    servers = requests.get("classicube.net/api/servers")
+    servers = json.loads(servers.text)
+    print("servers gotten")
+    print(servers['servers'][1])
 
 class MyClient(discord.Client):
     async def sendMessage(self, message, channel):
@@ -27,17 +38,21 @@ class MyClient(discord.Client):
     async def slurCheck(self, message, channel, guild):
         global slurred
         guild_id = guild
+        slurmessage = f"{message.content}"
+        slurmessage = slurmessage.lower()
+        print(slurmessage)
         slurs_length = len(slurs)
         i = 0
         slurred = False
         while i != slurs_length:
-            if slurs[i] in message.content:
+            if slurs[i] in slurmessage:
                 modchannel = discord.utils.get(guild_id.channels, name="flushedbot-logs")
                 await message.delete()
                 try:
                     await MyClient.sendMessage(self, f"Slur was filtered"
                                                      f"\nSent by {message.author}"
-                                                     f"\nMessage: {message.content}", modchannel)
+                                                     f"\nMessage: {message.content}"
+                                                     f"\nOffending slur: {slurs[i]}", modchannel)
                     slurred = True
                 except AttributeError:
                     await MyClient.sendMessage(self, "ERROR: A #flushedbot-logs channel does not exist!"
@@ -75,19 +90,20 @@ class MyClient(discord.Client):
                 authorIsMod = False
             i += 1
 
-        if BOT_PREFIX + "info" in message.content:
+        if message.content.startswith(BOT_PREFIX + "info"):
             await MyClient.sendMessage(self, f"FlushedBot version {version}"
+                                             f"{github_link}"
                                              f"\n----------------------------"
                                              f"\nBot made by p866e"
                                              f"\nRunning on a(n) {platform.system()} {platform.release()} host"
                                              f"\nPython version {platform.python_version()}", channel)
             return
 
-        if BOT_PREFIX + "ping" in message.content:
+        if message.content.startswith(BOT_PREFIX + "ping"):
             await MyClient.sendMessage(self, f"pong! {self.latency}ms", channel)
             return
 
-        if BOT_PREFIX + "help" in message.content or BOT_PREFIX + "cmds" in message.content or "<@1130529530663141397>" in message.content:
+        if message.content.startswith(BOT_PREFIX + "help") or message.content.startswith(BOT_PREFIX + "cmds")or message.content.startswith("<@1130529530663141397>"):
             await MyClient.sendMessage(self, f"```"
                                              f"Commands:\n(prefix is \"{BOT_PREFIX}\")\n"
                                              f"\ninfo                   Tells you info about the bot"
@@ -104,7 +120,7 @@ class MyClient(discord.Client):
                                              f"```", channel)
             return
 
-        if BOT_PREFIX + "verstree" in message.content or BOT_PREFIX + "versiontree" in message.content:
+        if message.content.startswith(BOT_PREFIX + "verstree") or message.content.startswith(BOT_PREFIX + "versiontree"):
             await MyClient.sendMessage(self, f"Version tree:\n\n"
                                              f"```"
                                              f"\n0_testing           added help/cmds, info"
@@ -115,10 +131,11 @@ class MyClient(discord.Client):
                                              f"\n0.32                added echo, modified info"
                                              f"\n0.33                modified help"
                                              f"\n0.34                added rate"
+                                             f"\n0.35-beta           i forgot what i added"
                                              f"\n```", channel)
             return
 
-        if BOT_PREFIX + "8ball" in message.content:
+        if message.content.startswith(BOT_PREFIX + "8ball"):
             messagecontent = message.content
             messagecontent = messagecontent.split(" ", 1)
             randomanswer = random.randint(0, len(eightballanswers)-1)
@@ -131,7 +148,7 @@ class MyClient(discord.Client):
                                              f"\nThe 8-ball answers: {eightballanswers[randomanswer]}", channel)
             return
 
-        if BOT_PREFIX + "kick" in message.content:
+        if message.content.startswith(BOT_PREFIX + "kick"):
             if message.author.top_role.permissions.administrator == True:
                 messagecontent = message.content
                 messagecontent = messagecontent.split(" ", 2)
@@ -141,7 +158,7 @@ class MyClient(discord.Client):
                 await MyClient.sendMessage(self, "You can't use this command!", channel)
             return
 
-        if BOT_PREFIX + "ban" in message.content:
+        if message.content.startswith(BOT_PREFIX + "ban"):
             if message.author.top_role.permissions.administrator == True:
                 messagecontent = message.content
                 messagecontent = messagecontent.split(" ", 2)
@@ -151,24 +168,24 @@ class MyClient(discord.Client):
                 await MyClient.sendMessage(self, "You can't use this command!", channel)
             return
 
-        if BOT_PREFIX + "uwu" in message.content:
+        if message.content.startswith(BOT_PREFIX + "uwu"):
             messagecontent = message.content
             messagecontent = messagecontent.split(" ", 1)
             randomanswer = random.randint(0, len(uwuemotes)-1)
             await MyClient.sendMessage(self, f"{uwuemotes[randomanswer]}", channel)
             return
 
-        if BOT_PREFIX + "bk" in message.content:
+        if message.content.startswith(BOT_PREFIX + "bk"):
             await MyClient.sendMessage(self, f"Number 15: Burger king foot lettuce. The last thing you'd want in your Burger King burger is someone's foot fungus. But as it turns out, that might be what you get. A 4channer uploaded a photo anonymously to the site showcasing his feet in a plastic bin of lettuce. With the statement: \"This is the lettuce you eat at Burger King.\" Admittedly, he had shoes on.", channel)
             return
 
-        if BOT_PREFIX + "echo" in message.content:
+        if message.content.startswith(BOT_PREFIX + "echo"):
             messagecontent = message.content
             messagecontent = messagecontent.split(" ", 1)
             await MyClient.sendMessage(self, f"{messagecontent[1]}", channel)
             return
 
-        if BOT_PREFIX + "rate" in message.content:
+        if message.content.startswith(BOT_PREFIX + "rate"):
             messagecontent = message.content
             messagecontent = messagecontent.split(" ", 1)
             rate_goodyness = random.randint(1,4)
@@ -206,4 +223,4 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 client = MyClient(intents=intents)
-client.run(BOT_TOKEN)
+client.run('MTEzMDUyOTUzMDY2MzE0MTM5Nw.Gjxysb.1LqtcphINeJMNxy0LOQ4OrNbJG6itQt90yB7Bk')
