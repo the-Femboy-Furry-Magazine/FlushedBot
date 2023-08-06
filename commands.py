@@ -4,7 +4,7 @@ import platform
 import random
 
 
-def has_slur(message):
+async def has_slur(message):
     for slur in bot_data.slurs:
         if slur in message:
             return slur
@@ -12,7 +12,7 @@ def has_slur(message):
         return False
 
 
-def cmd_info(flushed_client: discord_client.FlushedClient, arg: dict):
+async def cmd_info(flushed_client: discord_client.FlushedClient, arg: dict):
     channel = arg.get("channel")
     await flushed_client.send_message(
                             f"FlushedBot version {bot_data.version}"
@@ -25,12 +25,12 @@ def cmd_info(flushed_client: discord_client.FlushedClient, arg: dict):
     return
 
 
-def cmd_ping(flushed_client: discord_client.FlushedClient, arg: dict):
+async def cmd_ping(flushed_client: discord_client.FlushedClient, arg: dict):
     channel = arg.get("channel")
     await flushed_client.send_message(f"pong! {flushed_client.latency}ms", channel)
 
 
-def cmd_help(flushed_client: discord_client.FlushedClient, arg: dict):
+async def cmd_help(flushed_client: discord_client.FlushedClient, arg: dict):
     channel = arg.get("channel")
     await flushed_client.send_message(
                             f"```"
@@ -49,7 +49,7 @@ def cmd_help(flushed_client: discord_client.FlushedClient, arg: dict):
                             f"```", channel)
 
 
-def cmd_ban(flushed_client: discord_client.FlushedClient, arg: dict):
+async def cmd_ban(flushed_client: discord_client.FlushedClient, arg: dict):
     message = arg.get("message")
     channel = arg.get("channel")
     if message.author.top_role.permissions.administrator:
@@ -62,7 +62,7 @@ def cmd_ban(flushed_client: discord_client.FlushedClient, arg: dict):
         await flushed_client.send_message("You do not have permission to use this command.", channel)
 
 
-def cmd_kick(flushed_client: discord_client.FlushedClient, arg: dict):
+async def cmd_kick(flushed_client: discord_client.FlushedClient, arg: dict):
     message = arg.get("message")
     channel = arg.get("channel")
     if message.author.top_role.permissions.administrator:
@@ -75,7 +75,7 @@ def cmd_kick(flushed_client: discord_client.FlushedClient, arg: dict):
         await flushed_client.send_message("You do not have permission to use this command.", channel)
 
 
-def cmd_uwu(flushed_client: discord_client.FlushedClient, arg: dict):
+async def cmd_uwu(flushed_client: discord_client.FlushedClient, arg: dict):
     channel = arg.get("channel")
 
     random_index = random.randint(0, len(bot_data.uwu_emotes) - 1)
@@ -83,7 +83,7 @@ def cmd_uwu(flushed_client: discord_client.FlushedClient, arg: dict):
     await flushed_client.send_message(f"{bot_data.uwu_emotes[random_index]}", channel)
 
 
-def cmd_bk(flushed_client: discord_client.FlushedClient, arg: dict):
+async def cmd_bk(flushed_client: discord_client.FlushedClient, arg: dict):
     channel = arg.get("channel")
     await flushed_client.send_message(f"Number 15: Burger king foot lettuce. The last thing you'd want in your Burger "
                                       f"King burger is someone's foot fungus. But as it turns out, that might be what "
@@ -93,7 +93,7 @@ def cmd_bk(flushed_client: discord_client.FlushedClient, arg: dict):
                                       channel)
 
 
-def cmd_versiontree(flushed_client: discord_client.FlushedClient, arg: dict):
+async def cmd_versiontree(flushed_client: discord_client.FlushedClient, arg: dict):
     channel = arg.get("channel")
     await flushed_client.send_message(f"Version tree:\n\n"
                                       f"```"
@@ -110,7 +110,7 @@ def cmd_versiontree(flushed_client: discord_client.FlushedClient, arg: dict):
                                       channel)
 
 
-def cmd_echo(flushed_client: discord_client.FlushedClient, arg: dict):
+async def cmd_echo(flushed_client: discord_client.FlushedClient, arg: dict):
     message = arg.get("message")
     channel = arg.get("channel")
     message_content = message.content
@@ -118,7 +118,7 @@ def cmd_echo(flushed_client: discord_client.FlushedClient, arg: dict):
     await flushed_client.send_message(f"{message_content[1]}", channel)
 
 
-def cmd_rate(flushed_client: discord_client.FlushedClient, arg: dict):
+async def cmd_rate(flushed_client: discord_client.FlushedClient, arg: dict):
     message = arg.get("message")
     channel = arg.get("channel")
     message_arg = message.content

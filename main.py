@@ -8,15 +8,6 @@ import json
 
 import bot_data
 
-
-def get_servers():
-    global servers
-    servers = requests.get("classicube.net/api/servers")
-    servers = json.loads(servers.text)
-    print("servers gotten")
-    print(servers['servers'][1])
-
-
 import discord_client
 
 with open("bot_token.txt", "r") as bot_token_file:
