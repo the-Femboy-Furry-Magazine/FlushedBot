@@ -1,4 +1,4 @@
-<div style="text-align:center"><img src="http://gaykoyfish.xp3.biz/files/bot-transparent.png" title="FlushedBot logo"/></div>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="http://gaykoyfish.xp3.biz/files/bot-transparent.png" alt="" width="412" height="158" /></p>
 <hr>
 <p>FlushedBot is a Discord Bot that allows you to do moderation, fun stuff, and more in development!</p>
 <hr>
