@@ -223,4 +223,4 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 client = MyClient(intents=intents)
-client.run('MTEzMDUyOTUzMDY2MzE0MTM5Nw.Gjxysb.1LqtcphINeJMNxy0LOQ4OrNbJG6itQt90yB7Bk')
+client.run('token_here')
