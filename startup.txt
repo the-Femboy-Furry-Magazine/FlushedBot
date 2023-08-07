@@ -20,6 +20,6 @@
 ##   #    #  #    # #  # #    #  # #### #  #  ##
 #    #### #### #### #  # #### ###  #### ####  ##
 
-VERSION ------------------------------------ 0.4
-GITHUB ---- THE-FEMBOY-FURRY-MAGAZINE/FLUSHEDBOT
-DEVELOPERS ----------------------  P866E, ONEDEZ
+VERSION ------------------------------------ 0.41
+GITHUB ----- THE-FEMBOY-FURRY-MAGAZINE/FLUSHEDBOT
+DEVELOPERS -----------------------  P866E, ONEDEZ

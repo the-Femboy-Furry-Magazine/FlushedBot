@@ -143,6 +143,14 @@ async def cmd_rate(flushed_client, arg: dict):
                                                f"\nThe bot rates it a {random.randint(1, 20) // 2}/10.", channel)
     return
 
+async def cmd_water(flushed_client, arg: dict):
+    message = arg.get("message")
+    channel = arg.get("channel")
+    message_content = message.content
+    message_content = message_content.split(" ", 1)
+    await flushed_client.send_message(f"{message.author}, drink some water. Hydrate, so that you think straight.", channel)
+    return
+
 
 command_names = [
     "info",
@@ -154,7 +162,8 @@ command_names = [
     "bk",
     "versiontree",
     "echo",
-    "rate"
+    "rate",
+    "water"
 ]
 command_map = {
     "info": cmd_info,
@@ -167,6 +176,7 @@ command_map = {
     "versiontree": cmd_versiontree,
     "echo": cmd_echo,
     "rate": cmd_rate,
+    "water": cmd_water,
 }
 
 command_help = {
