@@ -114,6 +114,9 @@ async def cmd_versiontree(flushed_client, arg: dict):
                                       f"\n0.33                modified help"
                                       f"\n0.34                added rate"
                                       f"\n0.35-beta           i forgot what i added"
+                                      f"\n--------------------- FlushedBot overhaul"
+                                      f"\n0.4                 Added a bunch of shit. See the GitHub commits for the "
+                                      f"changes that 0.4 made so far"
                                       f"\n```",
                                       channel)
 
