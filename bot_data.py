@@ -10,10 +10,18 @@ def load_list_from_txt(filename):
     file.close()
     return output
 
+def load_list_from_txt_b(filename):
+    file = open(filename, "r")
+    output = file.read()
+
+    file.close()
+    return output
+
 
 slurs = load_list_from_txt("slurs.txt")
 eight_ball = load_list_from_txt("8ball.txt")
 uwu_emotes = load_list_from_txt("uwu.txt")
+startup = load_list_from_txt_b("startup.txt")
 
 moderators = ["1", "873014876275114005"]
 

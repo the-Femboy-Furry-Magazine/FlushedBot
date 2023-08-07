@@ -7,8 +7,11 @@ import json
 
 
 import bot_data
+print(bot_data.startup)
 
 import discord_client
+
+
 
 with open("bot_token.txt", "r") as bot_token_file:
     bot_token = bot_token_file.read()

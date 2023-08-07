@@ -170,14 +170,14 @@ command_map = {
 }
 
 command_help = {
-    "info": f"Usage: {BOT_PREFIX}help\nGives you info about the bot\nNo arguments required",
-    "ping": f"Usage: {BOT_PREFIX}ping\nRetrieves uptime about the bot\nNo arguments required",
-    "help": f"Usage: {BOT_PREFIX}help [command]\nGives you info about the bot\nNo arguments needed, but 1 optional argument is avaliable",
-    "ban": f"Usage: {BOT_PREFIX}ban [user] [reason]\nBans a player from the server\n1 argument is required, but the 2nd is optional\nAdministrator only",
-    "kick": f"Usage: {BOT_PREFIX}ban [user] [reason]\nKicks a player from the server\n1 argument is required, but the 2nd is optional\nAdministrator only",
-    "uwu": f"Usage: {BOT_PREFIX}help\nGives you a random ASCII unicode\nNo arguments required",
-    "bk": f"Usage: {BOT_PREFIX}help\nnumber 15\nNo arguments required",
-    "versiontree": f"Usage: {BOT_PREFIX}versiontree\nGives you an outline of the versions of FlushedBot\nNo arguments required",
-    "echo": f"Usage: {BOT_PREFIX}echo [message]\nRepeats what you say\nArgument is required",
-    "rate": f"Usage: {BOT_PREFIX}rate [something]\nRates something on a 1-10 scale.\nArgument is required",
+    "info": f"Usage: {bot_data.BOT_PREFIX}help\nGives you info about the bot\nNo arguments required",
+    "ping": f"Usage: {bot_data.BOT_PREFIX}ping\nRetrieves uptime about the bot\nNo arguments required",
+    "help": f"Usage: {bot_data.BOT_PREFIX}help [command]\nGives you info about the bot\nNo arguments needed, but 1 optional argument is avaliable",
+    "ban": f"Usage: {bot_data.BOT_PREFIX}ban [user] [reason]\nBans a player from the server\n1 argument is required, but the 2nd is optional\nAdministrator only",
+    "kick": f"Usage: {bot_data.BOT_PREFIX}ban [user] [reason]\nKicks a player from the server\n1 argument is required, but the 2nd is optional\nAdministrator only",
+    "uwu": f"Usage: {bot_data.BOT_PREFIX}help\nGives you a random ASCII unicode\nNo arguments required",
+    "bk": f"Usage: {bot_data.BOT_PREFIX}help\nnumber 15\nNo arguments required",
+    "versiontree": f"Usage: {bot_data.BOT_PREFIX}versiontree\nGives you an outline of the versions of FlushedBot\nNo arguments required",
+    "echo": f"Usage: {bot_data.BOT_PREFIX}echo [message]\nRepeats what you say\nArgument is required",
+    "rate": f"Usage: {bot_data.BOT_PREFIX}rate [something]\nRates something on a 1-10 scale.\nArgument is required",
 }
