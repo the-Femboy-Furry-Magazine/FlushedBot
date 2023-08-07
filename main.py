@@ -7,7 +7,6 @@ import json
 
 
 import bot_data
-print(bot_data.startup)
 
 import discord_client
 

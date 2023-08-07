@@ -30,6 +30,7 @@ slurred = False
 version = "0.4"
 github_link = "https://github.com/the-Femboy-Furry-Magazine/FlushedBot"
 
+print(bot_data.startup)
 
 print(slurs)
 print(eight_ball)
