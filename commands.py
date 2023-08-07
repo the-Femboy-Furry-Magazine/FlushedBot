@@ -151,6 +151,18 @@ async def cmd_water(flushed_client, arg: dict):
     await flushed_client.send_message(f"{message.author}, drink some water. Hydrate, so that you think straight.", channel)
     return
 
+async def cmd_8ball(flushed_client, arg: dict):
+    message = arg.get("message")
+    channel = arg.get("channel")
+    message_content = message.content
+    message_content = message_content.split(" ", 1)
+
+    random_index = random.randint(0, len(bot_data.eight_ball) - 1)
+
+    await flushed_client.send_message(f"{message.author} asked the 8-ball: {message_content[1]}\nThe 8-ball answers: \"{bot_data.eight_ball[random_index]}\"", channel)
+
+    return
+
 
 command_names = [
     "info",
@@ -163,7 +175,8 @@ command_names = [
     "versiontree",
     "echo",
     "rate",
-    "water"
+    "water",
+    "8ball"
 ]
 command_map = {
     "info": cmd_info,
@@ -177,6 +190,7 @@ command_map = {
     "echo": cmd_echo,
     "rate": cmd_rate,
     "water": cmd_water,
+    "8ball": cmd_8ball,
 }
 
 command_help = {
@@ -190,4 +204,5 @@ command_help = {
     "versiontree": f"Usage: {bot_data.BOT_PREFIX}versiontree\nGives you an outline of the versions of FlushedBot\nNo arguments required",
     "echo": f"Usage: {bot_data.BOT_PREFIX}echo [message]\nRepeats what you say\nArgument is required",
     "rate": f"Usage: {bot_data.BOT_PREFIX}rate [something]\nRates something on a 1-10 scale.\nArgument is required",
+    "8ball": f"Usage: {bot_data.BOT_PREFIX}8ball [question]\nAsks the 8-ball a question.\nArgument is required",
 }
