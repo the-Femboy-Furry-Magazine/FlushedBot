@@ -1,7 +1,7 @@
 import bot_data
 import platform
 import random
-
+import uptime
 
 async def has_slur(message):
     for slur in bot_data.slurs:
@@ -26,7 +26,7 @@ async def cmd_info(flushed_client, arg: dict):
 
 async def cmd_ping(flushed_client, arg: dict):
     channel = arg.get("channel")
-    await flushed_client.send_message(f"pong! {flushed_client.latency}ms", channel)
+    await flushed_client.send_message(f"pong! {flushed_client.latency}ms\nuptime: {uptime.uptime()}", channel)
 
 
 async def cmd_help(flushed_client, arg: dict):
