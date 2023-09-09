@@ -163,7 +163,25 @@ async def cmd_8ball(flushed_client, arg: dict):
 
     return
 
+async def cmd_sex(flushed_client, arg: dict):
+    message = arg.get("message")
+    channel = arg.get("channel")
+    if message.author.id == 1142595574219145428:
+        await flushed_client.send_message(f"PC Speaker mode activated.", channel)
+    else:
+        await flushed_client.send_message(f"You're not an admin. You cannot use this command. It is marked as NSFW. Disallowed.", channel)
 
+async def cmd_vf(flushed_client, arg: dict):
+    message = arg.get("message")
+    channel = arg.get("channel")
+    message_content = message.content
+    message_content = message_content.split(" ", 1)
+
+    try:
+        file = bot_data.load_list_from_txt_b(message_content[1])
+        await flushed_client.send_message(f"{message_content[1]}\n```\n{file}\n```", channel)
+    except Exception as error:
+        await flushed_client.send_message(f"An exception occurred!\n```{error}```", channel)
 command_names = [
     "info",
     "ping",
@@ -176,7 +194,9 @@ command_names = [
     "echo",
     "rate",
     "water",
-    "8ball"
+    "8ball",
+    "sex",
+    "viewfile"
 ]
 command_map = {
     "info": cmd_info,
@@ -191,6 +211,8 @@ command_map = {
     "rate": cmd_rate,
     "water": cmd_water,
     "8ball": cmd_8ball,
+    "sex": cmd_sex,
+    "viewfile": cmd_vf
 }
 
 command_help = {

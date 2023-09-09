@@ -2,7 +2,7 @@ BOT_PREFIX = "f!"
 moderators = ["1", "873014876275114005"]
 servmods = ["1"]
 slurred = False
-version = "0.41"
+version = "0.42"
 github_link = "https://github.com/the-Femboy-Furry-Magazine/FlushedBot"
 
 def load_list_from_txt(filename):
