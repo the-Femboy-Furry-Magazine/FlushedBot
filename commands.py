@@ -176,12 +176,12 @@ async def cmd_vf(flushed_client, arg: dict):
     channel = arg.get("channel")
     message_content = message.content
     message_content = message_content.split(" ", 1)
-
-    try:
-        file = bot_data.load_list_from_txt_b(message_content[1])
-        await flushed_client.send_message(f"{message_content[1]}\n```\n{file}\n```", channel)
-    except Exception as error:
-        await flushed_client.send_message(f"An exception occurred!\n```{error}```", channel)
+    if message.author.id == 1142595574219145428 or message.author.id == 375361833445621761:
+        try:
+            file = bot_data.load_list_from_txt_b(message_content[1])
+            await flushed_client.send_message(f"{message_content[1]}\n```\n{file}\n```", channel)
+        except Exception as error:
+            await flushed_client.send_message(f"An exception occurred!\n```{error}```", channel)
 command_names = [
     "info",
     "ping",
