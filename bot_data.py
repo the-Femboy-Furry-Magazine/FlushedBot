@@ -43,7 +43,7 @@ def load_list_from_txt_b(filename):
                 '\n                                ----------+'
                f'\n{filename} could not be opened.'
                f'\n{err}'
-               f'\nThis is not fatal. The bot can continue to run without startup text.')
+               f'\nThis is not fatal. The bot can continue to run without {filename}.')
         return
     output = file.read()
 

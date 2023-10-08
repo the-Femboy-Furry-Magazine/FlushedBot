@@ -2,6 +2,8 @@ import bot_data
 import platform
 import random
 import uptime
+import os
+import threading
 
 async def has_slur(message):
     for slur in bot_data.slurs:
@@ -17,7 +19,7 @@ async def cmd_info(flushed_client, arg: dict):
                             f"FlushedBot version {bot_data.version}"
                             f"\n{bot_data.github_link}"
                             f"\n----------------------------"
-                            f"\nBot made by p866e"
+                            f"\nBot made by vivi6n3"
                             f"\nRunning on a(n) {platform.system()} {platform.release()} host"
                             f"\nPython version {platform.python_version()}",
                             channel)
@@ -45,6 +47,7 @@ async def cmd_help(flushed_client, arg: dict):
                             f"\nversiontree            shows the versions of FlushedBot, and what they added"
                             f"\necho                   Echos your message"
                             f"\nrate                   Rates your message on a scale of 1 to 10"
+                            f"\nwater                  Drink the damn water."
                             f"```", channel)
 
 
@@ -58,9 +61,12 @@ async def cmd_ban(flushed_client, arg: dict):
         try:
             await flushed_client.ban_user(message, message.mentions[0], message.author, reason=message_args[2],
                                        channel=channel)
-        except IndexError:
-            await flushed_client.ban_user(message, message.mentions[0], message.author,
-                                           reason="No reason provided", channel=channel)
+        except Exception as err:
+            if err == IndexError:
+                await flushed_client.ban_user(message, message.mentions[0], message.author,
+                                               reason="No reason provided", channel=channel)
+            else:
+                await flushed_client.send_message(f"An error occured! \n{err}\nCheck the console!", channel)
     if not message.author.top_role.permissions.administrator:
         await flushed_client.send_message("You do not have permission to use this command.", channel)
 
@@ -76,9 +82,12 @@ async def cmd_kick(flushed_client, arg: dict):
         try:
             await flushed_client.kick_user(message, message.mentions[0], message.author, reason=message_args[2],
                                        channel=channel)
-        except IndexError:
-            await flushed_client.kick_user(message, message.mentions[0], message.author,
-                                           reason="No reason provided", channel=channel)
+        except Exception as err:
+            if err == IndexError:
+                await flushed_client.kick_user(message, message.mentions[0], message.author,
+                                              reason="No reason provided", channel=channel)
+            else:
+                await flushed_client.send_message(f"An error occured! \n{err}\nCheck the console!", channel)
     if not message.author.top_role.permissions.administrator:
         await flushed_client.send_message("You do not have permission to use this command.", channel)
 
@@ -158,8 +167,17 @@ async def cmd_8ball(flushed_client, arg: dict):
     message_content = message_content.split(" ", 1)
 
     random_index = random.randint(0, len(bot_data.eight_ball) - 1)
+    answer = bot_data.eight_ball[random_index]
 
-    await flushed_client.send_message(f"{message.author} asked the 8-ball: {message_content[1]}\nThe 8-ball answers: \"{bot_data.eight_ball[random_index]}\"", channel)
+    if "the gayest" in message_content[1]:
+        answer = "<@1142595574219145428>"
+    if "the gayest^2" in message_content[1]:
+        answer = "<@1031652215242375258>"
+    if "cGllZCBwaXBlcj8gbWVsbGlmbHVv" in message_content[1]:
+        answer = "E+rlo+E2%6ATAq:D0BK.B4V"
+    if "are femboys based" in message_content[1]:
+        answer = "ABSOLUTELY"
+    await flushed_client.send_message(f"{message.author} asked the 8-ball: {message_content[1]}\nThe 8-ball answers: \"{answer}\"", channel)
 
     return
 
@@ -167,7 +185,9 @@ async def cmd_sex(flushed_client, arg: dict):
     message = arg.get("message")
     channel = arg.get("channel")
     if message.author.id == 1142595574219145428:
-        await flushed_client.send_message(f"PC Speaker mode activated.", channel)
+        await flushed_client.send_message(f"p i s s   t i m e", channel)
+    elif message.author.id == 1031652215242375258:
+        await flushed_client.send_message(f"holy fuckamino it's::\n<@{message.author.id}>!!!!\n*fucking breakdances*", channel)
     else:
         await flushed_client.send_message(f"You're not an admin. You cannot use this command. It is marked as NSFW. Disallowed.", channel)
 
@@ -182,6 +202,9 @@ async def cmd_vf(flushed_client, arg: dict):
             await flushed_client.send_message(f"{message_content[1]}\n```\n{file}\n```", channel)
         except Exception as error:
             await flushed_client.send_message(f"An exception occurred!\n```{error}```", channel)
+    else:
+        await flushed_client.send_message(f"Only developers of FlushedBot are allowed to use this command.", channel)
+
 command_names = [
     "info",
     "ping",
@@ -196,7 +219,8 @@ command_names = [
     "water",
     "8ball",
     "sex",
-    "viewfile"
+    "viewfile",
+    "vf",
 ]
 command_map = {
     "info": cmd_info,
@@ -212,7 +236,8 @@ command_map = {
     "water": cmd_water,
     "8ball": cmd_8ball,
     "sex": cmd_sex,
-    "viewfile": cmd_vf
+    "viewfile": cmd_vf,
+    "vf": cmd_vf
 }
 
 command_help = {
